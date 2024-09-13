@@ -88,10 +88,10 @@
 
 .. code-block:: console
 
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2024S.git
-   $ cd rCore-Tutorial-Code-2024S
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2024A.git
+   $ cd rCore-Tutorial-Code-2024A
    $ git checkout ch8
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Test-2024S.git user
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Test-2024A.git user
 
 记得更新测例仓库的代码。
 
