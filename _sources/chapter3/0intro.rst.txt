@@ -18,10 +18,10 @@
 
 .. code-block:: console
 
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2024A.git
-   $ cd rCore-Tutorial-Code-2024A
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Code-2025S.git
+   $ cd rCore-Tutorial-Code-2025S
    $ git checkout ch3
-   $ git clone https://github.com/LearningOS/rCore-Tutorial-Test-2024A.git user
+   $ git clone https://github.com/LearningOS/rCore-Tutorial-Test-2025S.git user
 
 在 qemu 模拟器上运行本章代码：
 

@@ -24,7 +24,9 @@ chapter3练习
 - 说明：
    - 你可能会注意到，这个调用的读写并不安全，使用不当可能导致崩溃。这是因为在下一章节实现地址空间之前，系统中缺乏隔离机制。所以我们 **不要求你实现安全检查机制，只需通过测试用例即可** 。
    - 你还可能注意到，这个系统调用读写本任务内存的功能并不是很有用。这是因为作业的灵感来源 syscall 主要依靠 trace 功能追踪其他任务的信息，但在本章节我们还没有进程、线程等概念，所以简化了操作，只要求追踪自身的信息。
-- 提示：
+
+.. hint::
+   
     - 大胆修改已有框架！除了配置文件，你几乎可以随意修改已有框架的内容。
     - 系统调用次数可以考虑在内核态的 ``syscall`` 函数中统计。
     - 可以扩展 ``TaskManagerInner`` 中的结构来维护新的信息。
@@ -71,8 +73,8 @@ chapter3练习
 
    .. code-block:: shell
 
-      git clone git@git.tsinghua.edu.cn:os-lab/2024A/public/rcore-tutorial-checker-2024A.git ci-user
-      git clone git@git.tsinghua.edu.cn:os-lab/2024A/public/rcore-tutorial-test-2024A.git ci-user/user
+      git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-checker-2025S.git ci-user
+      git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-test-2025S.git ci-user/user
       cd ci-user && make test CHAPTER=$ID OFFLINE=1
 
 
@@ -85,10 +87,10 @@ chapter3练习
 --------------------------------------------
 
 1. 正确进入 U 态后，程序的特征还应有：使用 S 态特权指令，访问 S 态寄存器后会报错。
-   请同学们可以自行测试这些内容（运行 `三个 bad 测例 (ch2b_bad_*.rs) <https://github.com/LearningOS/rCore-Tutorial-Test-2024A/tree/master/src/bin>`_ ），
+   请同学们可以自行测试这些内容（运行 `三个 bad 测例 (ch2b_bad_*.rs) <https://github.com/LearningOS/rCore-Tutorial-Test-2025S/tree/master/src/bin>`_ ），
    描述程序出错行为，同时注意注明你使用的 sbi 及其版本。
 
-2. 深入理解 `trap.S <https://github.com/LearningOS/rCore-Tutorial-Code-2024A/blob/ch3/os/src/trap/trap.S>`_
+2. 深入理解 `trap.S <https://github.com/LearningOS/rCore-Tutorial-Code-2025S/blob/ch3/os/src/trap/trap.S>`_
    中两个函数 ``__alltraps`` 和 ``__restore`` 的作用，并回答如下问题:
 
    1. L40：刚进入 ``__restore`` 时，``a0`` 代表了什么值。请指出 ``__restore`` 的两种使用情景。

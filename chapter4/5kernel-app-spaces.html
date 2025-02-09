@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="基于地址空间的分时多任务" href="6multitasking-based-on-as.html" /><link rel="prev" title="实现 SV39 多级页表机制（下）" href="4sv39-implementation-2.html" />
 
     <meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
-        <title>内核与应用的地址空间 - rCore-Tutorial-Guide-2024A 文档</title>
+        <title>内核与应用的地址空间 - rCore-Tutorial-Guide-2025S 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2024A  文档</div></a>
+      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2025S  文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2024A  文档</span>
+  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2025S  文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
@@ -510,11 +510,10 @@
 在执行每个应用的代码的时候，内核需要控制 MMU 使用这个应用地址空间的多级页表进行地址转换。由于每个应用地址空间在创建
 的时候也顺带设置好了多级页表使得只有那些存放了它的数据的物理页帧能够通过该多级页表被映射到，这样它就只能访问自己的数据
 而无法触及其他应用或是内核的数据。</p>
-<p id="term-trampoline">启用分页模式下，内核代码的访存地址也会被视为一个虚拟地址并需要经过 MMU 的地址转换，因此我们也需要为内核对应构造一个
+<p id="term-trampoline-intro">启用分页模式下，内核代码的访存地址也会被视为一个虚拟地址并需要经过 MMU 的地址转换，因此我们也需要为内核对应构造一个
 地址空间，它除了仍然需要允许内核的各数据段能够被正常访问之后，还需要包含所有应用的内核栈以及一个
 <strong>跳板</strong> (Trampoline) 。我们会在本章的最后一节再深入介绍跳板的机制。</p>
-<p>下图是软件看到的 64 位地址空间在 SV39 分页模式下实际可能通过 MMU 检查的最高 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> （之前在
-<span class="xref std std-ref">这里</span> 中解释过最高和最低 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> 的问题）：</p>
+<p>下图是软件看到的 64 位地址空间在 SV39 分页模式下实际可能通过 MMU 检查的最高 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> （之前解释过最高和最低 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> 的问题）：</p>
 <a class="reference internal image-reference" href="../_images/kernel-as-high.png" id="kernel-as-high"><img alt="../_images/kernel-as-high.png" class="align-center" id="kernel-as-high" src="../_images/kernel-as-high.png" style="height: 400px;"/></a>
 <p>可以看到，跳板放在最高的一个虚拟页面中。接下来则是从高到低放置每个应用的内核栈，内核栈的大小由 <code class="docutils literal notranslate"><span class="pre">config</span></code> 子模块的
 <code class="docutils literal notranslate"><span class="pre">KERNEL_STACK_SIZE</span></code> 给出。它们的映射方式为 <code class="docutils literal notranslate"><span class="pre">MapPermission</span></code> 中的 rw 两个标志位，意味着这个逻辑段仅允许
@@ -810,7 +809,7 @@ program header 数据被存放的位置可以通过 <code class="docutils litera
         </div>
 
         <div class="related-information">
-              Copyright &#169; OS2024Autumn
+              Copyright &#169; OS2025Spring
             |
             Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
               and
@@ -881,7 +880,7 @@ var addUtterances = () => {
     script.src = "https://utteranc.es/client.js";
     script.async = "async";
 
-    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2024A");
+    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2025S");
     script.setAttribute("issue-term", "pathname");
     script.setAttribute("theme", "github-light");
     script.setAttribute("label", "comments");

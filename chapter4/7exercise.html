@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第五章：进程及进程管理" href="../chapter5/index.html" /><link rel="prev" title="基于地址空间的分时多任务" href="6multitasking-based-on-as.html" />
 
     <meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
-        <title>chapter4练习 - rCore-Tutorial-Guide-2024A 文档</title>
+        <title>chapter4练习 - rCore-Tutorial-Guide-2025S 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2024A  文档</div></a>
+      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2025S  文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2024A  文档</span>
+  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2025S  文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
@@ -337,11 +337,13 @@
 </dl>
 </li>
 </ul>
-<p>tips:</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
 <ul class="simple">
 <li><p>一定要注意 mmap 是的页表项，注意 riscv 页表项的格式与 port 的区别。</p></li>
 <li><p>你增加 PTE_U 了吗？</p></li>
 </ul>
+</div>
 </div>
 <div class="section" id="id2">
 <h3>实验要求<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
@@ -350,7 +352,10 @@
 <li><p>实现 mmap 和 munmap 两个系统调用，通过所有测例。</p></li>
 <li><p>实验目录请参考 ch3，报告命名 lab2.md/pdf</p></li>
 </ul>
-<p>TIPS：注意 port 参数的语义，它与内核定义的 MapPermission 有明显不同！</p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>注意 port 参数的语义，它与内核定义的 MapPermission 有明显不同！</p>
+</div>
 </div>
 </div>
 <div class="section" id="id3">
@@ -453,7 +458,7 @@
         </div>
 
         <div class="related-information">
-              Copyright &#169; OS2024Autumn
+              Copyright &#169; OS2025Spring
             |
             Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
               and
@@ -526,7 +531,7 @@ var addUtterances = () => {
     script.src = "https://utteranc.es/client.js";
     script.async = "async";
 
-    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2024A");
+    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2025S");
     script.setAttribute("issue-term", "pathname");
     script.setAttribute("theme", "github-light");
     script.setAttribute("label", "comments");

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="第六章：文件系统与I/O重定向" href="../chapter6/index.html" /><link rel="prev" title="进程管理机制的设计实现" href="3implement-process-mechanism.html" />
 
     <meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
-        <title>chapter5练习 - rCore-Tutorial-Guide-2024A 文档</title>
+        <title>chapter5练习 - rCore-Tutorial-Guide-2025S 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2024A  文档</div></a>
+      <a href="../index.html"><div class="brand">rCore-Tutorial-Guide-2025S  文档</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2024A  文档</span>
+  <span class="sidebar-brand-text">rCore-Tutorial-Guide-2025S  文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
@@ -290,7 +290,10 @@
 </dl>
 </li>
 </ul>
-<p>TIPS：虽然测例很简单，但提醒读者 spawn <strong>不必</strong> 像 fork 一样复制父进程的地址空间。</p>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>虽然测例很简单，但提醒读者 spawn <strong>不必</strong> 像 fork 一样复制父进程的地址空间。</p>
+</div>
 </div>
 <div class="section" id="stride">
 <h3>stride 调度算法<a class="headerlink" href="#stride" title="永久链接至标题">¶</a></h3>
@@ -318,13 +321,15 @@ BigStride 表示一个预先定义的大常数，则该调度方案为每个进�
 <span class="k">fn</span> <span class="nf">sys_set_priority</span><span class="p">(</span><span class="n">prio</span>: <span class="kt">isize</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">isize</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>实现 tips:</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
 <ul class="simple">
 <li><p>你可以在TCB加入新的字段来支持优先级等。</p></li>
 <li><p>为了减少整数除的误差，BIG_STRIDE 一般需要很大，但为了不至于发生反转现象（详见问答作业），或许选择一个适中的数即可，当然能进行溢出处理就更好了。</p></li>
 <li><p>stride 算法要找到 stride 最小的进程，使用优先级队列是效率不错的办法，但是我们的实验测例很简单，所以效率完全不是问题。事实上，很推荐使用暴力扫一遍的办法找最小值。</p></li>
 <li><p>注意设置进程的初始优先级。</p></li>
 </ul>
+</div>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
 <p>为了让大家能在本编程作业中使用 <code class="docutils literal notranslate"><span class="pre">Vec</span></code> 等数据结构，我们利用第三方库 <code class="docutils literal notranslate"><span class="pre">buddy_system_allocator</span></code>
@@ -442,7 +447,7 @@ stride， p1.stride = 255, p2.stride = 250，在 p2 执行一个时间片后，�
         </div>
 
         <div class="related-information">
-              Copyright &#169; OS2024Autumn
+              Copyright &#169; OS2025Spring
             |
             Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
               and
@@ -516,7 +521,7 @@ var addUtterances = () => {
     script.src = "https://utteranc.es/client.js";
     script.async = "async";
 
-    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2024A");
+    script.setAttribute("repo", "LearningOS/rCore-Tutorial-Guide-2025S");
     script.setAttribute("issue-term", "pathname");
     script.setAttribute("theme", "github-light");
     script.setAttribute("label", "comments");
