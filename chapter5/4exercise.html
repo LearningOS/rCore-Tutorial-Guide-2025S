@@ -265,6 +265,10 @@
 <h1>chapter5练习<a class="headerlink" href="#chapter5" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
 <h2>编程作业<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="syscall">
+<h3>关于之前的 syscall<a class="headerlink" href="#syscall" title="永久链接至标题">¶</a></h3>
+<p>你仍需要迁移上一章的 <code class="docutils literal notranslate"><span class="pre">sys_get_time</span></code> <code class="docutils literal notranslate"><span class="pre">sys_mmap</span></code> <code class="docutils literal notranslate"><span class="pre">sys_munmap</span></code> 以适应新的进程结构。不过，<strong>从本章节开始，不再要求维护 ``sys_trace`` 这一系统调用</strong>。</p>
+</div>
 <div class="section" id="id2">
 <h3>进程创建<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <p>大家一定好奇过为啥进程创建要用 fork + exec 这么一个奇怪的系统调用，就不能直接搞一个新进程吗？
@@ -467,6 +471,7 @@ stride， p1.stride = 255, p2.stride = 250，在 p2 执行一个时间片后，�
             <ul>
 <li><a class="reference internal" href="#">chapter5练习</a><ul>
 <li><a class="reference internal" href="#id1">编程作业</a><ul>
+<li><a class="reference internal" href="#syscall">关于之前的 syscall</a></li>
 <li><a class="reference internal" href="#id2">进程创建</a></li>
 <li><a class="reference internal" href="#stride">stride 调度算法</a></li>
 <li><a class="reference internal" href="#id3">实验要求</a></li>

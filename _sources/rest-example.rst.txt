@@ -8,7 +8,7 @@ reStructuredText 基本语法
    外部链接的引入方法。注意，链接的名字和用一对尖括号包裹起来的链接地址之间必须有一个空格。链接最后的下划线和片段的后续内容之间也需要
    有一个空格。
 
-   接下来是一个文档内部引用的例子。比如，戳 :doc:`chapter0/5setup-devel-env` 可以进入快速上手环节。
+   接下来是一个文档内部引用的例子。比如，戳 :doc:`0setup-devel-env` 可以进入快速上手环节。
 
 .. warning::
 
@@ -48,10 +48,6 @@ reStructuredText 基本语法
 
 `这是 <https://docs.readthedocs.io/en/stable/guides/cross-referencing-with-sphinx.html#the-doc-role>`_ 一个全面展示
 章节分布的例子，来自于 ReadTheDocs 的官方文档。事实上，现在我们也采用 ReadTheDocs 主题了，它非常美观大方。
-
-下面是一个测试 gif。
-
-.. image:: resources/test.gif
 
 接下来是一个表格的例子。
 

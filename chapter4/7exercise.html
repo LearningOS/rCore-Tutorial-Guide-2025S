@@ -265,9 +265,14 @@
 <h1>chapter4练习<a class="headerlink" href="#chapter4" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
 <h2>编程作业<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<div class="section" id="sys-get-time-sys-task-info">
-<h3>重写 sys_get_time 和 sys_task_info<a class="headerlink" href="#sys-get-time-sys-task-info" title="永久链接至标题">¶</a></h3>
-<p>引入虚存机制后，原来内核的 sys_get_time 和 sys_task_info 函数实现就无效了。请你重写这个函数，恢复其正常功能。</p>
+<div class="section" id="sys-get-time-sys-trace">
+<h3>重写 sys_get_time 和 sys_trace<a class="headerlink" href="#sys-get-time-sys-trace" title="永久链接至标题">¶</a></h3>
+<p>引入虚存机制后，原来内核的 <code class="docutils literal notranslate"><span class="pre">sys_get_time</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sys_trace</span></code> 函数实现就无效了。<strong>请你重写这两个系统调用的代码</strong>，恢复其正常功能。</p>
+<p>此外，由于本章我们有了地址空间作为隔离机制，所以 <code class="docutils literal notranslate"><span class="pre">sys_trace</span></code> <strong>需要考虑一些额外的情况</strong>：</p>
+<ul class="simple">
+<li><p>在读取（<code class="docutils literal notranslate"><span class="pre">trace_request</span></code> 为 0）时，如果对应地址用户不可见或不可读，则返回值应为 -1（<code class="docutils literal notranslate"><span class="pre">isize</span></code> 格式的 -1，而非 <code class="docutils literal notranslate"><span class="pre">u8</span></code>）。</p></li>
+<li><p>在写入（<code class="docutils literal notranslate"><span class="pre">trace_request</span></code> 为 1）时，如果对应地址用户不可见或不可写，则返回值应为 -1（<code class="docutils literal notranslate"><span class="pre">isize</span></code> 格式的 -1，而非 <code class="docutils literal notranslate"><span class="pre">u8</span></code>）。</p></li>
+</ul>
 </div>
 <div class="section" id="mmap-munmap">
 <h3>mmap 和 munmap 匿名映射<a class="headerlink" href="#mmap-munmap" title="永久链接至标题">¶</a></h3>
@@ -477,7 +482,7 @@
             <ul>
 <li><a class="reference internal" href="#">chapter4练习</a><ul>
 <li><a class="reference internal" href="#id1">编程作业</a><ul>
-<li><a class="reference internal" href="#sys-get-time-sys-task-info">重写 sys_get_time 和 sys_task_info</a></li>
+<li><a class="reference internal" href="#sys-get-time-sys-trace">重写 sys_get_time 和 sys_trace</a></li>
 <li><a class="reference internal" href="#mmap-munmap">mmap 和 munmap 匿名映射</a></li>
 <li><a class="reference internal" href="#id2">实验要求</a></li>
 </ul>
