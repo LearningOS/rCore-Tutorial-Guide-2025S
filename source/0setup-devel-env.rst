@@ -207,7 +207,7 @@ Qemu 模拟器安装
 
 如果你的环境配置正确，你应当会看到如下输出：
 
-.. code-block:: bash
+.. code-block::
 
    [rustsbi] RustSBI version 0.3.0-alpha.4, adapting to RISC-V SBI v1.0.0
    .______       __    __      _______.___________.  _______..______   __
