@@ -43,7 +43,7 @@ chapter8 练习
    :linenos:
 
    Finish[i] == false;
-   Need[i,j] ≤ Work[j];
+   Need[i,j] <= Work[j];
 
 若找到，执行步骤 3，否则执行步骤 4。
 

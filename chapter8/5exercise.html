@@ -297,8 +297,8 @@ m 个元素。初始时，Work = Available ；结束向量 Finish，表示系统
 设置 Finish[i] = true。</p></li>
 <li><p>从线程集合中找到一个能满足下述条件的线程</p></li>
 </ol>
-<div class="highlight-Rust notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Finish[i] == false;
-<span class="linenos">2</span>Need[i,j] ≤ Work[j];
+<div class="highlight-Rust notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">Finish</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">2</span><span class="n">Need</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">Work</span><span class="p">[</span><span class="n">j</span><span class="p">];</span><span class="w"></span>
 </pre></div>
 </div>
 <p>若找到，执行步骤 3，否则执行步骤 4。</p>
