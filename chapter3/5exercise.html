@@ -362,7 +362,7 @@ git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-test-2025S.
 <li><p>深入理解 <a class="reference external" href="https://github.com/LearningOS/rCore-Tutorial-Code-2025S/blob/ch3/os/src/trap/trap.S">trap.S</a>
 中两个函数 <code class="docutils literal notranslate"><span class="pre">__alltraps</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 的作用，并回答如下问题:</p>
 <ol class="arabic">
-<li><p>L40：刚进入 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 时，<code class="docutils literal notranslate"><span class="pre">a0</span></code> 代表了什么值。请指出 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 的两种使用情景。</p></li>
+<li><p>L40：刚进入 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 时，<code class="docutils literal notranslate"><span class="pre">sp</span></code> 代表了什么值。请指出 <code class="docutils literal notranslate"><span class="pre">__restore</span></code> 的两种使用情景。</p></li>
 <li><p>L43-L48：这几行汇编代码特殊处理了哪些寄存器？这些寄存器的的值对于进入用户态有何意义？请分别解释。</p>
 <div class="highlight-riscv notranslate"><div class="highlight"><pre><span></span><span class="nd">ld</span><span class="w"> </span><span class="na">t0</span>,<span class="w"> </span><span class="m">32</span>*<span class="m">8</span>(<span class="na">sp</span>)<span class="w"></span>
 <span class="nd">ld</span><span class="w"> </span><span class="na">t1</span>,<span class="w"> </span><span class="m">33</span>*<span class="m">8</span>(<span class="na">sp</span>)<span class="w"></span>

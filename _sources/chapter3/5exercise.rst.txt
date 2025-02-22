@@ -93,7 +93,7 @@ chapter3练习
 2. 深入理解 `trap.S <https://github.com/LearningOS/rCore-Tutorial-Code-2025S/blob/ch3/os/src/trap/trap.S>`_
    中两个函数 ``__alltraps`` 和 ``__restore`` 的作用，并回答如下问题:
 
-   1. L40：刚进入 ``__restore`` 时，``a0`` 代表了什么值。请指出 ``__restore`` 的两种使用情景。
+   1. L40：刚进入 ``__restore`` 时，``sp`` 代表了什么值。请指出 ``__restore`` 的两种使用情景。
 
    2. L43-L48：这几行汇编代码特殊处理了哪些寄存器？这些寄存器的的值对于进入用户态有何意义？请分别解释。
 
