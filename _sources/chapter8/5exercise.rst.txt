@@ -95,12 +95,26 @@ chapter8 练习
    此时需要结束该进程管理的所有线程并回收其资源。
    - 需要回收的资源有哪些？
    - 其他线程的 TaskControlBlock 可能在哪些位置被引用，分别是否需要回收，为什么？
-2. 对比以下两种 ``Mutex.unlock`` 的实现，二者有什么区别？这些区别可能会导致什么问题？
+2. 对比以下两种 ``Mutex`` 中的实现，二者有什么区别？这些区别可能会导致什么问题？
 
 .. code-block:: Rust
     :linenos:
 
     impl Mutex for Mutex1 {
+        fn lock(&self) {
+            loop {
+                let mut mutex_inner = self.inner.exclusive_access();
+                if mutex_inner.locked {
+                    mutex_inner.wait_queue.push_back(current_task().unwrap());
+                    drop(mutex_inner);
+                    block_current_and_run_next();
+                } else {
+                    mutex_inner.locked = true;
+                    break;
+                }
+            }
+        }
+        
         fn unlock(&self) {
             let mut mutex_inner = self.inner.exclusive_access();
             assert!(mutex_inner.locked);
@@ -112,6 +126,17 @@ chapter8 练习
     }
 
     impl Mutex for Mutex2 {
+        fn lock(&self) {
+            let mut mutex_inner = self.inner.exclusive_access();
+            if mutex_inner.locked {
+                mutex_inner.wait_queue.push_back(current_task().unwrap());
+                drop(mutex_inner);
+                block_current_and_run_next();
+            } else {
+                mutex_inner.locked = true;
+            }
+        }
+
         fn unlock(&self) {
             let mut mutex_inner = self.inner.exclusive_access();
             assert!(mutex_inner.locked);
