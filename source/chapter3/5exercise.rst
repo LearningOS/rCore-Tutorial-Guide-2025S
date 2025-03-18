@@ -68,16 +68,6 @@ chapter3练习
       riscv = { git = "https://gitee.com/rcore-os/riscv", features = ["inline-asm"] }
       virtio-drivers = { git = "https://gitee.com/rcore-os/virtio-drivers", rev = "4ee80e5" }
 
-
-- 本地离线运行 CI 脚本的方法（注意 CI 脚本会修改代码仓库的文件，请在运行前暂存改动）：
-
-   .. code-block:: shell
-
-      git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-checker-2025S.git ci-user
-      git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-test-2025S.git ci-user/user
-      cd ci-user && make test CHAPTER=$ID OFFLINE=1
-
-
 .. note::
 
     你的实现只需且必须通过测例，建议读者感到困惑时先检查测例。
