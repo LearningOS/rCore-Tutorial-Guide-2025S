@@ -337,15 +337,6 @@ virtio-drivers <span class="o">=</span> <span class="o">{</span> <span class="nv
 </div>
 </div></blockquote>
 </li>
-<li><p>本地离线运行 CI 脚本的方法（注意 CI 脚本会修改代码仓库的文件，请在运行前暂存改动）：</p>
-<blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-checker-2025S.git ci-user
-git clone git@git.tsinghua.edu.cn:os-lab/2025S/public/rcore-tutorial-test-2025S.git ci-user/user
-<span class="nb">cd</span> ci-user <span class="o">&amp;&amp;</span> make <span class="nb">test</span> <span class="nv">CHAPTER</span><span class="o">=</span><span class="nv">$ID</span> <span class="nv">OFFLINE</span><span class="o">=</span><span class="m">1</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
