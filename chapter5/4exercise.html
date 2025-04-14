@@ -347,7 +347,7 @@ BigStride 表示一个预先定义的大常数，则该调度方案为每个进�
 检查 stride 调度算法是否满足公平性要求，六个子程序运行的次数应该大致与其优先级呈正比，测试通过标准是
 <span class="math notranslate nohighlight">\(\max{\frac{runtimes}{prio}}/ \min{\frac{runtimes}{prio}} &lt; 1.5\)</span>.</p>
 <p>CI 的原理是用 <code class="docutils literal notranslate"><span class="pre">ch5_usertest</span></code> 替代 <code class="docutils literal notranslate"><span class="pre">ch5b_initproc</span></code> ，使内核在所有测例执行完后直接退出。</p>
-<p>从本章开始，你的内核必须前向兼容，能通过前一章的所有测例。</p>
+<p>从本章开始，你的内核必须前向兼容。上文提到的无需再维护的 <code class="docutils literal notranslate"><span class="pre">sys_trace</span></code> 涉及的 <code class="docutils literal notranslate"><span class="pre">ch3_trace</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ch4_trace1</span></code> 两个测例会被删除，除此之外，你的内核需要能通过前一章的所有测例。</p>
 </li>
 </ul>
 <div class="admonition note">

@@ -292,24 +292,28 @@
 </pre></div>
 </div>
 <p>待内核初始化完毕之后，将在屏幕上打印可用的应用列表并进入shell程序：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[rustsbi] RustSBI version 0.2.0-alpha.4
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[rustsbi] RustSBI version 0.4.0-alpha.1, adapting to RISC-V SBI v2.0.0
 .______       __    __      _______.___________.  _______..______   __
 |   _  \     |  |  |  |    /       |           | /       ||   _  \ |  |
 |  |_)  |    |  |  |  |   |   (----`---|  |----`|   (----`|  |_)  ||  |
 |      /     |  |  |  |    \   \       |  |      \   \    |   _  &lt; |  |
 |  |\  \----.|  `--'  |.----)   |      |  |  .----)   |   |  |_)  ||  |
 | _| `._____| \______/ |_______/       |__|  |_______/    |______/ |__|
-
-[rustsbi] Implementation: RustSBI-QEMU Version 0.0.1
-[rustsbi-dtb] Hart count: cluster0 with 1 cores
-[rustsbi] misa: RV64ACDFIMSU
-[rustsbi] mideleg: ssoft, stimer, sext (0x222)
-[rustsbi] medeleg: ima, ia, bkpt, la, sa, uecall, ipage, lpage, spage (0xb1ab)
-[rustsbi] pmp0: 0x80000000 ..= 0x800fffff (rwx)
-[rustsbi] pmp1: 0x80000000 ..= 0x807fffff (rwx)
-[rustsbi] pmp2: 0x0 ..= 0xffffffffffffff (---)
-[rustsbi] enter supervisor 0x80200000
+[rustsbi] Implementation     : RustSBI-QEMU Version 0.2.0-alpha.3
+[rustsbi] Platform Name      : riscv-virtio,qemu
+[rustsbi] Platform SMP       : 1
+[rustsbi] Platform Memory    : 0x80000000..0x88000000
+[rustsbi] Boot HART          : 0
+[rustsbi] Device Tree Region : 0x87000000..0x87000ef2
+[rustsbi] Firmware Address   : 0x80000000
+[rustsbi] Supervisor Address : 0x80200000
+[rustsbi] pmp01: 0x00000000..0x80000000 (-wr)
+[rustsbi] pmp02: 0x80000000..0x80200000 (---)
+[rustsbi] pmp03: 0x80200000..0x88000000 (xwr)
+[rustsbi] pmp04: 0x88000000..0x00000000 (-wr)
 [kernel] Hello, world!
+remap_test passed!
+after initproc!
 /**** APPS ****
 ch2b_bad_address
 ch2b_bad_instructions
@@ -318,11 +322,10 @@ ch2b_hello_world
 ch2b_power_3
 ch2b_power_5
 ch2b_power_7
-ch3b_sleep
-ch3b_sleep1
 ch3b_yield0
 ch3b_yield1
 ch3b_yield2
+ch4b_sbrk
 ch5b_exit
 ch5b_forktest
 ch5b_forktest2
@@ -330,6 +333,7 @@ ch5b_forktest_simple
 ch5b_forktree
 ch5b_initproc
 ch5b_user_shell
+ch5b_usertest
 **************/
 Rust user shell
 &gt;&gt;
