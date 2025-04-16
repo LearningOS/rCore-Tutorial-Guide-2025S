@@ -225,14 +225,13 @@ Trap 处理的总体流程如下：首先通过 ``__alltraps`` 将 Trap 上下�
         call trap_handler
 
 - 第 7 行我们使用 ``.align`` 将 ``__alltraps`` 的地址 4 字节对齐，这是 RISC-V 特权级规范的要求；
-- 第 9 行的 ``csrrw`` 原型是 :math:`\text{csrrw rd, csr, rs}` 可以将 CSR 当前的值读到通用寄存器 :math:`\text{rd}` 中，然后将
-  通用寄存器 :math:`\text{rs}` 的值写入该 CSR 。因此这里起到的是交换 sscratch 和 sp 的效果。在这一行之前 sp 指向用户栈， sscratch
-  指向内核栈（原因稍后说明），现在 sp 指向内核栈， sscratch 指向用户栈。
-- 第 12 行，我们准备在内核栈上保存 Trap 上下文，于是预先分配 :math:`34\times 8` 字节的栈帧，这里改动的是 sp ，说明确实是在内核栈上。
-- 第 13~24 行，保存 Trap 上下文的通用寄存器 x0~x31，跳过 x0 和 tp(x4)，原因之前已经说明。我们在这里也不保存 sp(x2)，因为它在第 9 行
-  后指向的是内核栈。用户栈的栈指针保存在 sscratch 中，必须通过 ``csrr`` 指令读到通用寄存器中后才能使用，因此我们先考虑保存其它通用寄存器，腾出空间。
+- 第 9 行，在这一行之前 sp 指向用户栈， sscratch 指向内核栈（原因稍后说明），现在 sp 指向内核栈， sscratch 指向用户栈。 ``csrrw`` 指令 :math:`\text{csrrw rd, csr, rs}` 可以将 csr 当前的值读到通用寄存器 :math:`\text{rd}` 中，然后将
+  通用寄存器 :math:`\text{rs}` 的值写入该 csr 。因此这里起到的是交换 sscratch 和 sp 的效果。
+- 第 12 行，在内核栈上分配 :math:`34\times 8` 字节的栈帧保存 ``TrapContext``,下面的指令开始进行上下文现场的保存。
 
-  我们要基于 sp 来找到每个寄存器应该被保存到的正确的位置。实际上，在栈帧分配之后，我们可用于保存 Trap 上下文的地址区间为 :math:`[\text{sp},\text{sp}+8\times34)` ，
+- 第 13~24 行，将通用寄存器 x0~x31 的值存储到 ``TrapContext.x`` 指向的内存区域。跳过 x0 和 tp(x4)，原因之前已经说明。我们在这里也不保存 sp(x2)，因为它在当前指向的是内核栈。用户栈的栈指针保存在 sscratch 中，必须通过 ``csrr`` 指令读到通用寄存器中后才能使用，因此我们先考虑保存其它通用寄存器，腾出空间。
+
+  如何基于 ``sp``找到每个寄存器被存储到的内核栈位置 ？在栈帧分配之后，我们可用于保存 ``TrapContext`` 的地址区间为 :math:`[\text{sp},\text{sp}+8\times34)` ，
   按照  ``TrapContext`` 结构体的内存布局，基于内核栈的位置（sp所指地址）来从低地址到高地址分别按顺序放置 x0~x31这些通用寄存器，最后是 sstatus 和 sepc 。因此通用寄存器 xn
   应该被保存在地址区间 :math:`[\text{sp}+8n,\text{sp}+8(n+1))` 。
 
@@ -243,10 +242,8 @@ Trap 处理的总体流程如下：首先通过 ``__alltraps`` 将 Trap 上下�
   因为它们刚刚已经被保存了。
 - 第 30~31 行专门处理 sp 的问题。首先将 sscratch 的值读到寄存器 t2 并保存到内核栈上，注意： sscratch 的值是进入 Trap 之前的 sp 的值，指向
   用户栈。而现在的 sp 则指向内核栈。
-- 第 33 行令 :math:`\text{a}_0\leftarrow\text{sp}`，让寄存器 a0 指向内核栈的栈指针也就是我们刚刚保存的 Trap 上下文的地址，
-  这是由于我们接下来要调用 ``trap_handler`` 进行 Trap 处理，它的第一个参数 ``cx`` 由调用规范要从 a0 中获取。而 Trap 处理函数
-  ``trap_handler`` 需要 Trap 上下文的原因在于：它需要知道其中某些寄存器的值，比如在系统调用的时候应用程序传过来的 syscall ID 和
-  对应参数。我们不能直接使用这些寄存器现在的值，因为它们可能已经被修改了，因此要去内核栈上找已经被保存下来的值。
+- 第 33 行， :math:`\text{a}_0\leftarrow\text{sp}`，让寄存器 a0 指向内核栈栈顶元素，也就是我们刚刚保存的 `&mut TrapContext`，
+- 第 34 行，调用 Rust 的 ``trap_handler`` 进行 Trap 处理，函数的第一个参数 ``cx`` 根据调用规范需要从 a0 中获取。 ``trap_handler`` 需要 ``&mut TrapContext`` 的原因在于：它需要知道其中某些寄存器的值，比如在系统调用的时候应用程序传过来的 syscall ID 和函数调用参数。我们不能直接使用这些寄存器现在的值，因为它们可能已经被内核代码破坏修改了，因此要去内核栈上找原始值。
 
 
 .. _term-atomic-instruction:
@@ -290,17 +287,17 @@ Trap 处理的总体流程如下：首先通过 ``__alltraps`` 将 Trap 上下�
         .endr
         # release TrapContext on kernel stack
         addi sp, sp, 34*8
-        # now sp->kernel stack, sscratch->user stack
+        # now sp->user stack, sscratch->kernel stack
         csrrw sp, sscratch, sp
         sret
 
-- 第 8 行比较奇怪，我们暂且不管，假设它从未发生，那么 sp 仍然指向内核栈的栈顶。
-- 第 11~24 行负责从内核栈顶的 Trap 上下文恢复通用寄存器和 CSR 。注意我们要先恢复 CSR 再恢复通用寄存器，这样我们使用的三个临时寄存器
+- 第 8 行，sp 仍然指向内核栈的栈顶, 具体原因我们暂且不管，在下文Trap 分发与处理章节有详细解释。
+- 第 11~24 行负责从内核栈顶的 TrapContext 内存区域恢复通用寄存器和 CSR 。注意我们要先恢复 CSR 再恢复通用寄存器，这样我们使用的三个临时寄存器
   才能被正确恢复。
-- 在第 26 行之前，sp 指向保存了 Trap 上下文之后的内核栈栈顶， sscratch 指向用户栈栈顶。我们在第 26 行在内核栈上回收 Trap 上下文所
-  占用的内存，回归进入 Trap 之前的内核栈栈顶。第 27 行，再次交换 sscratch 和 sp，现在 sp 重新指向用户栈栈顶，sscratch 也依然保存
-  进入 Trap 之前的状态并指向内核栈栈顶。
-- 在应用程序控制流状态被还原之后，第 28 行我们使用 ``sret`` 指令回到 U 特权级继续运行应用程序控制流。
+- 第 26 行，释放内核栈 [sp,sp + 34*8) 保存的 TrapContext 。在回到 U 特权级前，需要将本次系统调用构造的内核栈释放。
+- 第 27 行，当前 sscratch 指向用户栈栈顶，再次交换 sscratch 和 sp。sp 重新指向用户栈栈顶，sscratch 恢复为 Trap 之前的状态并指向内核栈栈顶。
+- 在应用程序控制流状态被还原之后，
+- 第 28 行我们使用 ``sret`` 指令回到 U 特权级继续运行应用程序控制流。
 
 Trap 分发与处理
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
