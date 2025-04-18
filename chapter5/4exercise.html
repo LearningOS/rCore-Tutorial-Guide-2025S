@@ -342,7 +342,7 @@ BigStride 表示一个预先定义的大常数，则该调度方案为每个进�
 <li><p>实现分支：ch5。</p></li>
 <li><p>实验目录请参考 ch3。注意在reports中放入lab1-3的所有报告。</p></li>
 <li><p>通过所有测例。</p>
-<p>在 os 目录下 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span> <span class="pre">BASE=2</span></code> 加载所有测例， <code class="docutils literal notranslate"><span class="pre">ch5_usertest</span></code> 打包了所有你需要通过的测例，
+<p>在 os 目录下 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span> <span class="pre">BASE=2</span></code> 加载所有测例，然后在终端中输入 <code class="docutils literal notranslate"><span class="pre">ch5_usertest</span></code> 运行，这个测例打包了所有你需要通过的测例。
 你也可以通过修改这个文件调整本地测试的内容, 或者单独运行某测例来纠正特定的错误。 <code class="docutils literal notranslate"><span class="pre">ch5_stride</span></code>
 检查 stride 调度算法是否满足公平性要求，六个子程序运行的次数应该大致与其优先级呈正比，测试通过标准是
 <span class="math notranslate nohighlight">\(\max{\frac{runtimes}{prio}}/ \min{\frac{runtimes}{prio}} &lt; 1.5\)</span>.</p>
@@ -350,6 +350,10 @@ BigStride 表示一个预先定义的大常数，则该调度方案为每个进�
 <p>从本章开始，你的内核必须前向兼容。上文提到的无需再维护的 <code class="docutils literal notranslate"><span class="pre">sys_trace</span></code> 涉及的 <code class="docutils literal notranslate"><span class="pre">ch3_trace</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ch4_trace1</span></code> 两个测例会被删除，除此之外，你的内核需要能通过前一章的所有测例。</p>
 </li>
 </ul>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>注意，由于本章内核默认将  <code class="docutils literal notranslate"><span class="pre">ch5b_initproc</span></code> 作为初始测例运行，所以必须用 <code class="docutils literal notranslate"><span class="pre">BASE=2</span></code> 而非之前章节的 <code class="docutils literal notranslate"><span class="pre">BASE=0</span></code> 加载。</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p>利用 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code> 系列指令，能方便地将前一章分支 commit 移植到本章分支。</p>
