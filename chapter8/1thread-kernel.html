@@ -559,7 +559,7 @@
 <h4>线程退出<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h4>
 <p>当一个非主线程的其他线程发出 <code class="docutils literal notranslate"><span class="pre">sys_exit</span></code> 系统调用时，内核会调用 <code class="docutils literal notranslate"><span class="pre">exit_current_and_run_next</span></code>
 函数退出当前线程并切换到下一个线程，但不会导致其所属进程的退出。当 <strong>主线程</strong> 即进程发出这个系统调用，
-内核会回收整个进程（这包括了其管理的所有线程）资源，并退出。主线程本身不会被立即回收资源，而是延迟回收，我们在**再往后一段代码**解释主线程自己如何退出。具体实现如下：</p>
+内核会回收整个进程（这包括了其管理的所有线程）资源，并退出。主线程本身不会被立即回收资源，而是延迟回收，我们在 <strong>再往后一段代码</strong> 解释主线程自己如何退出。具体实现如下：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// os/src/syscall/process.rs</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">sys_exit</span><span class="p">(</span><span class="n">exit_code</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
